@@ -1,11 +1,12 @@
 {
-  "name": "disco-explorer-old",
+  "name": "disco-explorer",
   "version": "0.0.1",
-  "description": "",
+  "description": "An admin ui for managing a disco-node",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "lite-server"
+    "dev": "lite-server",
+    "postinstall": "node_modules/typescript/bin/tsc -p ."
   },
   "author": "",
   "license": "ISC",
