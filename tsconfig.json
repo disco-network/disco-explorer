@@ -7,11 +7,12 @@
         "removeComments": true,
         "moduleResolution": "classic",
         "sourceMap": false,
-        "declaration": false
+        "declaration": false,
+        "outDir": "scripts"
     },
     "include": [
-        "scripts/core/**/*",
-        "scripts/views/**/*"
+        "source/core/**/*",
+        "source/views/**/*"
     ],
     "exclude": [
         "node_modules",

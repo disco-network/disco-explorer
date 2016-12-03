@@ -1,3 +1,5 @@
 /node_modules
 /build
+/scripts/core
+/scripts/views
 *.txt
