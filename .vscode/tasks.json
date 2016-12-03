@@ -5,6 +5,6 @@
     "command": "node_modules/typescript/bin/tsc",
     "isShellCommand": true,
     "args": ["-p", "."],
-    "showOutput": "silent",
+    "showOutput": "always",
     "problemMatcher": "$tsc"
 }
