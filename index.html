@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Ontology Explorer - d!sco - Web API Client</title>
+    <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="/content/site.css" rel="stylesheet" />
+    <link href="/content/themes/base/jsonviewer.css" rel="stylesheet" />
+
+    <link href="/content/themes/base/jquery.ui.core.css" rel="stylesheet" />
+    <link href="/content/themes/base/jquery.ui.resizable.css" rel="stylesheet" />
+    <link href="/content/themes/base/jquery.ui.selectable.css" rel="stylesheet" />
+    <link href="/content/themes/base/jquery.ui.accordion.css" rel="stylesheet" />
+    <link href="/content/themes/base/jquery.ui.autocomplete.css" rel="stylesheet" />
+    <link href="/content/themes/base/jquery.ui.button.css" rel="stylesheet" />
+    <link href="/content/themes/base/jquery.ui.dialog.css" rel="stylesheet" />
+    <link href="/content/themes/base/jquery.ui.slider.css" rel="stylesheet" />
+    <link href="/content/themes/base/jquery.ui.tabs.css" rel="stylesheet" />
+    <link href="/content/themes/base/jquery.ui.datepicker.css" rel="stylesheet" />
+    <link href="/content/themes/base/jquery.ui.progressbar.css" rel="stylesheet" />
+    <link href="/content/themes/base/jquery.ui.theme.css" rel="stylesheet" />
+
+    <script src="/scripts/jquery-2.0.1.js"></script>
+    <script src="/scripts/jquery-ui-1.10.3.js"></script>
+    <script src="/scripts/modernizr-2.6.2.js"></script>
+    <script src="/scripts/knockout-2.3.0.debug.js"></script>
+    <script src="/scripts/core/jsonviewer.js"></script>
+    <script src="/scripts/core/common.js"></script>
+    <script src="/scripts/core/knockout.extensions.js"></script>
+    <script src="/scripts/core/data.context.js"></script>
+    <script src="/scripts/core/data.odata.js"></script>
+    <script src="/scripts/core/data.viewmodel.js"></script>
+
+</head>
+
+<body>
+    <div id="loading" data-bind="visible: isBusy">
+        <div>Loading Data...</div>
+    </div>
+
+    <header>
+        <div class="content-wrapper">
+            <div id="site-logo" class="float-left"><img src="/content/themes/base/images/disco-Logo-small.png" /></div>
+            <div class="float-left">
+                <p class="site-title">d!sco - Web API Client</p>
+            </div>
+            <div class="float-right">
+                <section id="login">
+                    <ul>
+                        <li><a href="/Account/Register" id="registerLink">Register</a></li>
+                        <li><a href="/Account/Login" id="loginLink">Log in</a></li>
+                    </ul>
+
+                </section>
+                <nav>
+                    <ul id="menu">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/Home/About">About</a></li>
+                        <li><a href="/Home/ApiHelp">API Help</a></li>
+                        <li><a href="/Home/Contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+
+        <section class="featured">
+            <div class="content-wrapper">
+                <hgroup class="title">
+                    <h1>Ontology Explorer.</h1>
+                    <h2>Version 0.3 Beta</h2>
+                </hgroup>
+                <p>
+                    To learn more about the <b>Discussion Ontology Framework (d!sco)</b> visit
+                    <a href="http://disco.codeplex.com" title="d!sco Website" target="_blank">http://disco.codeplex.com</a>.
+                    The page features
+                    <mark>source code, documentation, and more</mark> to help you getting started with <i>d!sco</i>. If you have
+                    any questions about <i>d!sco</i> visit
+                    <a href="http://news.piratenpartei.de/forumdisplay.php?fid=438" title="d!sco Forum" target="_blank">our forums</a>                    (german only).
+                </p>
+                <div>
+                    The <b>Discussion Ontology Framework (d!sco)</b> consists of two parts:
+                    <ol>
+                        <li>
+                            The <b>d!sco Ontology</b> provides the semantic description for general discussions. The current
+                            implementation uses the following database schema: <a href="http://wiki.piratenpartei.de/wiki/images/2/29/DiscoOntologySchema.png"
+                                target="_blank">DiscoOntologySchema.png</a><br /><br />
+                        </li>
+                        <li>
+                            The <b>d!sco Web API</b> that enables access to the ontology data. The <i>Ontology Explorer</i>                            is a reference implementation that developers can use to learn how to interact with the <i>d!sco Web API</i>.
+                            Using the <a href="http://en.wikipedia.org/wiki/Web_development_tools" target="_blank">Web Development Tools</a>                            within your favorite browser or any other network monitor like <a href="http://fiddler2.com"
+                                target="_blank">Fiddler</a>, you can investigate what calls are made to the <i>d!sco Web API</i>                            while clicking around on this page.
+                        </li>
+                    </ol>
+                    <b><i>Have fun!</i></b>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-wrapper main-content clear-fix">
+
+            <div class="errorPanel" data-bind="visible: errorCollection().length > 0, foreach: { data: errorCollection, afterAdd: insertJsonTree }">
+                <p class="error">
+                    <span data-bind="text: message">N/A</span>
+                    <!-- ko with: innererror -->
+                    <span data-bind="text: message"></span>
+                    <!-- ko with: exception -->
+                    <span data-bind="text: message"></span>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                </p>
+            </div>
+
+            <h3>We suggest the following:</h3>
+            <ol class="round">
+                <li class="one">
+                    <h5>Getting Started</h5>
+                    <div>Click the button below, to load the current metadata and start to explore the ontology:</div>
+                    <p><button data-bind="click: onMetadataClick">Load Metadata</button></p>
+                    <div data-bind="visible: entityCollection().length > 0">
+                        <label>Explore The Ontology Metadata:</label>
+                        <span>Click on the '...' symbol below to expand/collapse the JSON data structure that describes the current implementation of the ontology.</span>
+                        <div id="jsonViewer">N/A</div>
+                    </div>
+                    <sub class="collapsableHeadline" data-bind="visible: metadata, click: $root.onCollapsableHeadlineClick">Click here, to see the full JSON metadata!</sub>
+                    <pre class="collapsablePanel" contenteditable="true" data-bind="text: ko.toJSON(metadata, null, '   ')">N/A</pre>
+                    <sub class="collapsableHeadline" data-bind="visible: entitySets().length > 0, click: $root.onCollapsableHeadlineClick">Or click here, to see the condensed JSON metadata data that is used for internal processing.</sub>
+                    <pre class="collapsablePanel" contenteditable="true" data-bind="text: ko.toJSON(entitySets, null, '   ')">N/A</pre>
+                </li>
+
+                <li class="two">
+                    <h5>Explore the Ontology</h5>
+                    <div data-bind="visible: entityCollection().length == 0">Please start with loading the metadata first!</div>
+                    <div data-bind="visible: entityCollection().length > 0">
+                        Click on the entity set names below to show/hide the data currently available!
+                    </div>
+                    <div class="entitySets" data-bind="foreach: entityCollection">
+                        <h4 class="collapsableHeadline" data-bind="click: $parent.onShowEntitySetDataClick, text: display"></h4>
+                        <div>
+                            <div data-bind="attr: { id: display }, template: { name: 'entitySet-template', data: $data }"></div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="three">
+                    <h5>Use the Web API</h5>
+                    <br />
+                </li>
+            </ol>
+
+            <script type="text/html" id="entitySet-template">
+                <div>
+                    <div class="tabs" data-bind="if: allLoaded, attr: { id: $parent.display().concat('-tab-panel') }">
+                        <div data-bind="tabBinding: { }, if: details().length >= 0">
+                            <ul>
+                                <li><a data-bind="attr: { href: '#' + $parent.display() + '-overview-tab' }">Overview </a></li>
+                                <!-- ko foreach: details -->
+                                <li>
+                                    <!-- ko if: detailMultiplicity == 'one' -->
+                                    <a data-bind="attr: { href: '#' + $parent.display() + '-' + entityData.display() + '-' + data.Id + '-detail-tab' }, appendText: entityData.display() + ' (#' + data.Id + ')'">Detail </a>
+                                    <!-- /ko -->
+                                    <!-- ko if: detailMultiplicity == 'many' -->
+                                    <a data-bind="attr: { href: '#' + $parent.display() + '-' + entityData.display() + '-collection-' + data.rows().map(x => x.Id).join() + '-detail-tab' }, appendText: entityData.display() + ' (many)'">Detail </a>
+                                    <!-- /ko -->
+                                </li>
+                                <!-- /ko -->
+                            </ul>
+                            <div class="dataGrid-container" data-bind="attr: { id: $parent.display() + '-overview-tab' }, template: { name: 'dataGrid-template', data: $data }">
+                            </div>
+                            <!-- ko foreach: details -->
+                            <!-- ko if: detailMultiplicity == 'one' -->
+                            <div class="dataGrid-container" data-bind="attr: { id: $parent.display() + '-' + entityData.display() + '-' + data.Id + '-detail-tab' }">
+                                <table class="dataDetails" data-bind="foreach: entityData.properties">
+                                    <tbody>
+                                        <tr>
+                                            <td data-bind="text: name">n/a</td>
+                                            <td><b data-bind="text: $parent.data[name]">n/a</b></td>
+                                            <td>
+                                                <!-- ko if: isNavigation && !isMany -->
+                                                <button data-bind="click: $root.onShowPropertyDetailsClick.bind($root, $data, $parents)">...</button>
+                                                <!-- /ko -->
+                                            </td>
+                                        </tr>
+                                        <tr data-bind="if: isMany">
+                                            <td colspan="3">
+                                                <div data-bind="template: { name: 'dataGrid-template', data: $parent.data.elements[name] }"></div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if: detailMultiplicity == 'many' -->
+                            <div class="dataGrid-container" data-bind="attr: { id: $parent.display() + '-' + entityData.display() + '-collection-' + data.rows().map(x => x.Id).join() + '-detail-tab' }, template: { name: 'dataGrid-template', data: data }">
+                            </div>
+                            <!-- /ko -->
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                </div>
+            </script>
+
+            <script type="text/html" id="dataGrid-template">
+                <!-- ko if: $data != undefined -->
+                <table class="dataGrid" data-bind="if: rows().length > 0">
+                    <thead>
+                        <tr data-bind="foreach: properties">
+                            <th data-bind="text: name"></th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach: rows">
+                        <tr data-bind="click: $root.onShowDetailedDataClick.bind($root, $data, $parents), foreach: $parent.properties">
+                            <td data-bind="text: $parent[name]">n/a</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- /ko -->
+            </script>
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div>Learn more about <a href="http://disco.codeplex.com/">d!sco - A Discussion Ontology Framework</a></div>
+            <div>&copy; 2016 - d!sco - Web API Client</div>
+        </div>
+    </footer>
+
+    <script src="/scripts/datajs-1.1.1beta2.js"></script>
+    <script src="/scripts/views/home.index.js"></script>
+
+</body>
+
+</html>

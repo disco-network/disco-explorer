@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "target": "ES5",
+        "module": "amd",
+        "removeComments": true,
+        "moduleResolution": "classic",
+        "sourceMap": false,
+        "declaration": false
+    },
+    "include": [
+        "scripts/core/**/*",
+        "scripts/views/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts"
+    ]
+}
