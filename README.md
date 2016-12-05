@@ -13,9 +13,13 @@ The [`disco-explorer`](https://github.com/disco-network/disco-explorer) reposito
 * Review [source code changes](https://github.com/disco-network/disco-explorer/pulls)
 * Review the [documentation](https://github.com/disco-network/disco-explorer-docs) and make pull requests for anything from typos to new content
 
+## Prerequisites
+
+### For Development
+
 We are using [`vscode`](https://code.visualstudio.com/) for development.
 
-## Setup
+#### Setup
 
 Currently we do use `disco-node.local` as the hostname. You could either change this in the configuration files `./bs-config.json` for the disco-explorer and `./source/config/settings.ts` for the the odata endpoint.
 Or you could configure this hostname alias in your `/etc/hosts` file. That's up to you.
