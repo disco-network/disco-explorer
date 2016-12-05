@@ -11,8 +11,7 @@
         "outDir": "scripts"
     },
     "include": [
-        "source/core/**/*",
-        "source/views/**/*"
+        "source/**/*"
     ],
     "exclude": [
         "node_modules",
