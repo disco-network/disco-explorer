@@ -4,6 +4,7 @@
 /// <reference path="data.odata.ts" />
 
 /// <reference path="../core/jsonviewer.ts" />
+/// <reference path="../config/settings.ts" />
 
 module disco.core.viewmodel {
 
@@ -57,7 +58,8 @@ module disco.core.viewmodel {
         //public getServiceUri(): string { return '/api/odata/' }
         public getServiceUri(): string { 
             // return 'http://dev.disco-network.local/api/odata/'; 
-            return 'http://disco-node.local:3000/api/odata/'; 
+            // return 'http://disco-node.local:3000/api/odata/';
+            return disco.config.Settings.endpointRootUrl; 
         }
 
         public onCollapsableHeadlineClick(data: any, element: any) {
