@@ -31,6 +31,7 @@ git clone https://github.com/disco-network/disco-explorer.git disco-explorer
 cd disco-explorer
 npm install
 ```
+You also need to run a local [`disco-node`](https://github.com/disco-network/disco-node) installation to connect disco-explorer to the data.
 
 ## Usage
 
