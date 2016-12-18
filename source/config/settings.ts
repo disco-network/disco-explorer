@@ -9,7 +9,7 @@ module disco.config {
   export class Settings {
     public static readonly endpoint: IOdataEndpoint = {
       protocol: "http",
-      hostname: "disco-node.local",
+      hostname: "localhost",
       port: 3000,
       root: "/api/odata/"
     };
