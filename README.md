@@ -21,8 +21,7 @@ We are using [`vscode`](https://code.visualstudio.com/) for development.
 
 #### Setup
 
-Currently we do use `disco-node.local` as the hostname. You could either change this in the configuration files `./bs-config.json` for the disco-explorer and `./source/config/settings.ts` for the the odata endpoint.
-Or you could configure this hostname alias in your `/etc/hosts` file. That's up to you.
+Currently we do use `localhost` as the default hostname. You could either change this in the configuration files `./bs-config.json` for the disco-explorer and `./source/config/settings.ts` for the odata endpoint.
 
 ## Get the Code
 
