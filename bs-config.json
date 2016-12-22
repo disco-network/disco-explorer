@@ -1,5 +1,4 @@
 {
-  "open": "external",
   "host": "localhost",
   "port": 8000,
   "server": {
