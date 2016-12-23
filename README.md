@@ -35,7 +35,7 @@ You also need to run a local [`disco-node`](https://github.com/disco-network/dis
 ## Usage
 
 ```shell
-npm run dev
+npm run server
 ```
 
 ## License
